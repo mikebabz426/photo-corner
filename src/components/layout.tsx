@@ -5,11 +5,11 @@ import Header from "./header"
 import "@fontsource/roboto"
 import GlobalThemeProvider from "./../GlobalThemeProvider"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, logo }) => {
   return (
     <GlobalThemeProvider>
       <CssBaseline>
-        <Header />
+        <Header logo={logo} />
         {children}
       </CssBaseline>
     </GlobalThemeProvider>

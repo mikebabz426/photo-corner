@@ -1,5 +1,5 @@
 import React from "react"
-import { Container, AppBar, Toolbar, Box } from "@material-ui/core"
+import { Container, AppBar, Toolbar, Box, Typography } from "@material-ui/core"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import { makeStyles, fade } from "@material-ui/core/styles"
@@ -59,31 +59,37 @@ const useStyles = makeStyles(theme => ({
   },
   logoStyle: {
     maxHeight: "40px",
+    maxWidth: "170px",
   },
 }))
 
-const Header = () => {
+const Header = ({ logo }) => {
   const classes = useStyles()
+
+  let isLoggedIn: boolean = true
+  let username: string = "John Doe"
 
   return (
     <AppBar>
       <Toolbar className={classes.root}>
         <Container maxWidth="lg" className={classes.navContainer}>
           <Box className={classes.container}>
-            <Link
-              to="/"
-              style={{
-                textDecoration: `none`,
-              }}
-            >
-              <Logo className={classes.logoStyle} />
-            </Link>
+            {logo ? (
+              <Link
+                to="/"
+                style={{
+                  textDecoration: `none`,
+                }}
+              >
+                <Logo className={classes.logoStyle} />
+              </Link>
+            ) : null}
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder="Explore..."
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -92,7 +98,21 @@ const Header = () => {
               />
             </div>
           </Box>
-          <Box className={classes.container}></Box>
+          <Box className={classes.container}>
+            {isLoggedIn ? (
+              <>
+                <Typography>Welcome, {username}</Typography>
+                {""}
+                <Typography style={{ marginLeft: "1rem" }}>Sign Out</Typography>
+              </>
+            ) : (
+              <>
+                <Typography>Welcome, Guest</Typography>
+                {""}
+                <Typography>Sign In</Typography>
+              </>
+            )}
+          </Box>
         </Container>
       </Toolbar>
     </AppBar>
