@@ -1,9 +1,9 @@
 import React from "react"
 import { CssBaseline } from "@material-ui/core"
 import PropTypes from "prop-types"
-import Header from "./header"
+import Header from "./Header"
 import "@fontsource/roboto"
-import GlobalThemeProvider from "./../GlobalThemeProvider"
+import GlobalThemeProvider from "../GlobalThemeProvider"
 
 const Layout = ({ children, logo }) => {
   return (
