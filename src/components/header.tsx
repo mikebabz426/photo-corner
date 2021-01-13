@@ -6,6 +6,8 @@ import { makeStyles, fade } from "@material-ui/core/styles"
 import SearchIcon from "@material-ui/icons/Search"
 import InputBase from "@material-ui/core/InputBase"
 import Logo from "../assets/logo.svg"
+import LoginButton from "./LoginButton"
+import LogoutButton from "./LogoutButton"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -99,17 +101,17 @@ const Header = ({ logo }) => {
             </div>
           </Box>
           <Box className={classes.container}>
-            {isLoggedIn ? (
+            {logo ? (
               <>
                 <Typography>Welcome, {username}</Typography>
                 {""}
-                <Typography style={{ marginLeft: "1rem" }}>Sign Out</Typography>
+                <LogoutButton />
               </>
             ) : (
               <>
                 <Typography>Welcome, Guest</Typography>
                 {""}
-                <Typography>Sign In</Typography>
+                <LoginButton />
               </>
             )}
           </Box>
