@@ -12,9 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export interface HomeProps {}
-
-const Home: React.SFC<HomeProps> = () => {
+const Home = () => {
   const classes = useStyles()
 
   return (

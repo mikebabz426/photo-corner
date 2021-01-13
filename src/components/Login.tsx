@@ -3,8 +3,8 @@ import { Typography, Button, Box } from "@material-ui/core"
 import Grid from "@material-ui/core/Grid"
 import { makeStyles } from "@material-ui/core/styles"
 import Img from "gatsby-image"
-import { graphql } from "gatsby"
 import Logo from "../assets/logo-dark.svg"
+import { useStaticQuery, graphql } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,7 +40,40 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Login = ({ data }) => {
+const Login = () => {
+  const data = useStaticQuery(graphql`
+    {
+      astro: file(relativePath: { eq: "astro.jpg" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      backflip: file(relativePath: { eq: "backflip.jpg" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      lake: file(relativePath: { eq: "lake.jpg" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      waterfall: file(relativePath: { eq: "waterfall.jpg" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
+
   const classes = useStyles()
   const astro = data.astro.childImageSharp.fluid
   const backflip = data.backflip.childImageSharp.fluid
@@ -102,38 +135,5 @@ const Login = ({ data }) => {
     </Grid>
   )
 }
-
-export const query = graphql`
-  {
-    astro: file(relativePath: { eq: "astro.jpg" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    backflip: file(relativePath: { eq: "backflip.jpg" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    lake: file(relativePath: { eq: "lake.jpg" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    waterfall: file(relativePath: { eq: "waterfall.jpg" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`
 
 export default Login

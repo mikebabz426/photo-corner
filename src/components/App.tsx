@@ -1,7 +1,4 @@
 import React from "react"
-import Layout from "./Layout"
-import SEO from "./seo"
-import { Container } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Tabs, Tab, Box } from "@material-ui/core"
 import Home from "./Home"
@@ -73,7 +70,6 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
-  // const tabs = ["Home", "Trends", "Profile"]
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
@@ -81,36 +77,29 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <Layout logo={true}>
-        <SEO title="Home" />
-        <Container maxWidth="lg" className={classes.root}>
-          <Box className={classes.tabsContainer} position="static">
-            <Tabs
-              className={classes.tabBar}
-              variant="fullWidth"
-              value={value}
-              onChange={handleChange}
-              aria-label="nav tabs"
-            >
-              <LinkTab label="Home" href="/drafts" {...a11yProps(0)} />
-              <LinkTab label="Trending" href="/trash" {...a11yProps(1)} />
-              <LinkTab label="Profile" href="/spam" {...a11yProps(2)} />
-            </Tabs>
-          </Box>
-          {/* {tabs.map((tab, i) => (
-            <TabPanel value={value} comp={`< ${tab}/>`} index={i} key={i} />
-          ))} */}
-          <TabPanel value={value} comp={<Home />} index={0}>
-            Home
-          </TabPanel>
-          <TabPanel value={value} comp={<Trends />} index={1}>
-            Trending
-          </TabPanel>
-          <TabPanel value={value} comp={<Profile />} index={2}>
-            Profile
-          </TabPanel>
-        </Container>
-      </Layout>
+      <Box className={classes.tabsContainer} position="static">
+        <Tabs
+          className={classes.tabBar}
+          variant="fullWidth"
+          value={value}
+          onChange={handleChange}
+          aria-label="nav tabs"
+        >
+          <LinkTab label="Home" href="/home" {...a11yProps(0)} />
+          <LinkTab label="Trending" href="/trending" {...a11yProps(1)} />
+          <LinkTab label="Profile" href="/profile" {...a11yProps(2)} />
+        </Tabs>
+      </Box>
+
+      <TabPanel value={value} comp={<Home />} index={0}>
+        Home
+      </TabPanel>
+      <TabPanel value={value} comp={<Trends />} index={1}>
+        Trending
+      </TabPanel>
+      <TabPanel value={value} comp={<Profile />} index={2}>
+        Profile
+      </TabPanel>
     </React.Fragment>
   )
 }

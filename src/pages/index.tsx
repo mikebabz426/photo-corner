@@ -3,7 +3,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import { Container } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import App from "../components/App"
+import Login from "../components/Login"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,10 +17,10 @@ const IndexPage = () => {
 
   return (
     <React.Fragment>
-      <Layout logo={true}>
-        <SEO title="Home" />
+      <Layout logo={false}>
+        <SEO title="Log In" />
         <Container maxWidth="lg" className={classes.root}>
-          <App />
+          <Login />
         </Container>
       </Layout>
     </React.Fragment>

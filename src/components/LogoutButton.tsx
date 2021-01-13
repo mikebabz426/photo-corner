@@ -8,7 +8,7 @@ const LogoutButton = () => {
   return (
     <Button
       variant="contained"
-      onClick={() => logout({ returnTo: "http://localhost:8000/logout" })}
+      onClick={() => logout({ returnTo: process.env.AUTH0_LOGOUT })}
     >
       Log Out
     </Button>
