@@ -7,6 +7,7 @@ import InputBase from "@material-ui/core/InputBase"
 import LoginButton from "./LoginButton"
 import LogoutButton from "./LogoutButton"
 import Logo from "../assets/logo.svg"
+import { useAuth0 } from "@auth0/auth0-react"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,8 +67,9 @@ const useStyles = makeStyles(theme => ({
 
 const Header = ({ logo }) => {
   const classes = useStyles()
+  const { user, isAuthenticated, isLoading } = useAuth0()
 
-  let username: string = "John Doe"
+  if (isLoading) return <Typography variant="body1">Loading...</Typography>
 
   return (
     <AppBar>
@@ -99,9 +101,9 @@ const Header = ({ logo }) => {
             </div>
           </Box>
           <Box className={classes.container}>
-            {logo ? (
+            {isAuthenticated ? (
               <>
-                <Typography>Welcome, {username}</Typography>
+                <Typography>Welcome, {user.name}</Typography>
                 {""}
                 <LogoutButton />
               </>
