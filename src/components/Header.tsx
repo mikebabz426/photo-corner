@@ -1,13 +1,12 @@
 import React from "react"
 import { Container, AppBar, Toolbar, Box, Typography } from "@material-ui/core"
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import { makeStyles, fade } from "@material-ui/core/styles"
 import SearchIcon from "@material-ui/icons/Search"
 import InputBase from "@material-ui/core/InputBase"
-import Logo from "../assets/logo.svg"
 import LoginButton from "./LoginButton"
 import LogoutButton from "./LogoutButton"
+import Logo from "../assets/logo.svg"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -68,7 +67,6 @@ const useStyles = makeStyles(theme => ({
 const Header = ({ logo }) => {
   const classes = useStyles()
 
-  let isLoggedIn: boolean = true
   let username: string = "John Doe"
 
   return (
@@ -119,14 +117,6 @@ const Header = ({ logo }) => {
       </Toolbar>
     </AppBar>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header

@@ -16,14 +16,14 @@ const IndexPage = () => {
   const classes = useStyles()
 
   return (
-    <React.Fragment>
+    <>
       <Layout logo={false}>
         <SEO title="Log In" />
         <Container maxWidth="lg" className={classes.root}>
           <Login />
         </Container>
       </Layout>
-    </React.Fragment>
+    </>
   )
 }
 

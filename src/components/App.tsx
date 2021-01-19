@@ -4,6 +4,7 @@ import { Tabs, Tab, Box } from "@material-ui/core"
 import Home from "./Home"
 import Trends from "./Trends"
 import Profile from "./Profile"
+import { useAuth0 } from "@auth0/auth0-react"
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -70,37 +71,45 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
+  const { isLoading, isAuthenticated, error } = useAuth0()
+  console.log(isAuthenticated)
+
+  isLoading ? <div>Loading</div> : null
+
+  error ? <div>Oops... {error.message}</div> : null
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
 
   return (
-    <React.Fragment>
-      <Box className={classes.tabsContainer} position="static">
-        <Tabs
-          className={classes.tabBar}
-          variant="fullWidth"
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs"
-        >
-          <LinkTab label="Home" href="/home" {...a11yProps(0)} />
-          <LinkTab label="Trending" href="/trending" {...a11yProps(1)} />
-          <LinkTab label="Profile" href="/profile" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
+    isAuthenticated && (
+      <React.Fragment>
+        <Box className={classes.tabsContainer} position="static">
+          <Tabs
+            className={classes.tabBar}
+            variant="fullWidth"
+            value={value}
+            onChange={handleChange}
+            aria-label="nav tabs"
+          >
+            <LinkTab label="Home" href="/home" {...a11yProps(0)} />
+            <LinkTab label="Trending" href="/trending" {...a11yProps(1)} />
+            <LinkTab label="Profile" href="/profile" {...a11yProps(2)} />
+          </Tabs>
+        </Box>
 
-      <TabPanel value={value} comp={<Home />} index={0}>
-        Home
-      </TabPanel>
-      <TabPanel value={value} comp={<Trends />} index={1}>
-        Trending
-      </TabPanel>
-      <TabPanel value={value} comp={<Profile />} index={2}>
-        Profile
-      </TabPanel>
-    </React.Fragment>
+        <TabPanel value={value} comp={<Home />} index={0}>
+          Home
+        </TabPanel>
+        <TabPanel value={value} comp={<Trends />} index={1}>
+          Trending
+        </TabPanel>
+        <TabPanel value={value} comp={<Profile />} index={2}>
+          Profile
+        </TabPanel>
+      </React.Fragment>
+    )
   )
 }
 
